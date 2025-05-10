@@ -1,0 +1,34 @@
+.header {
+  background-color: #f5a124;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-image {
+  height: 50px;
+  padding-left: 20px;
+}
+
+.footer {
+  background-color: #f5a124;
+  width: 100%;
+  height: 80px;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 480px) {
+}
+
+@media (min-width: 1025px) {
+}
+
+@media (min-width: 1200px) {
+}
