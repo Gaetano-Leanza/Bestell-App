@@ -20,6 +20,10 @@ main {
   flex: 1;
 }
 
+a {
+  color: white !important;
+}
+
 h1 {
   padding-top: 40px;
   font-size: 40px;
