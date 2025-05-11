@@ -8,12 +8,17 @@
 }
 
 .header-container {
-  height: 50px;
+  width: 1200px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0 auto;
 }
 
-.logo-image {
+.header-icon {
   height: 50px;
-  padding-left: 20px;
 }
 
 .footer {
@@ -21,7 +26,20 @@
   width: 100%;
   height: 100px;
   display: flex;
+  justify-content: center;
+}
+
+.footer-container {
+  width: 1200px;
+  height: 100px;
+  display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.footer-icon {
+  height: 50px;
 }
 
 .foot-left {
@@ -29,26 +47,18 @@
   height: 100px;
   display: flex;
   justify-content: center;
-  align-Items: center;
+  align-items: center;
 }
 
-.footer-middle {
+.foot-middle {
   width: 400px;
   height: 100px;
   display: flex;
-  flex-direction: column; 
-  align-items: center;    
+  flex-direction: column;
+  align-items: center;
 }
 
-.footer-right {
-  width: 150px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-Items: center;
-}
-
-.footer-middle-rights {
+.foot-middle-rights {
   height: 50px;
   margin-top: 10px;
   color: white;
@@ -56,10 +66,18 @@
   text-align: center;
 }
 
-.footer-middle-links {
+.foot-middle-links {
   height: 30px;
   margin-top: 2px;
   margin-bottom: 0px;
+}
+
+.foot-right {
+  width: 150px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-media {
@@ -70,18 +88,41 @@
 }
 
 .footer-icon-right img {
-  width: 30px;    
-  height: 30px;  
-  object-fit: contain; 
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 @media (max-width: 1024px) {
+  .footer-container {
+    width: 100%;
+    height: 100px;
+  }
 }
 
 @media (max-width: 768px) {
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
+  .foot-left {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .foot-middle-rights {
+    font-size: 15px;
+  }
+
+  .foot-middle-links {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .foot-right {
+    display: none;
+  }
 }
 
 @media (min-width: 1025px) {
