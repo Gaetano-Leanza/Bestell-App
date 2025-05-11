@@ -3,23 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bookstore</title>
+    <title>Bestell App</title>
     <link rel="stylesheet" href="../styles/standard.css" />
+    <link rel="stylesheet" href="../styles/headerAndFooter.css" />
     <link rel="stylesheet" href="../styles/sites.css" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" />
   </head>
 
   <body>
     <header class="header">
       <div class="header-container">
-        <div class="header-container">
-          <img
-            class="logo-image"
-            src="./assets/img/Logo/Bestell App- Logo.svg"
-            alt="Bestell App Logo"
-          />
-        </div>
+        <img
+          class="header-icon"
+          src="../assets/img/Logo/Bestell App- Logo.svg"
+          alt="Bestell App Logo"
+        />
+
+        <button class="burger-menu" aria-label="Menü öffnen">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+
+        <nav class="header-nav">
+          <a href="#">Start</a>
+          <a href="#">Menü</a>
+          <a href="#">Kontakt</a>
+        </nav>
       </div>
     </header>
 
@@ -28,8 +51,8 @@
         <div id="mail_sent">
           <h7>Vielen Dank für deine Nachricht!</h7>
           <h7>
-            Deine Nachricht wurde erfolgreich versendet. Wir werden uns
-            schnellstmöglich mit deinem Anliegen befassen.
+            Deine Nachricht wurde erfolgreich versendet.<br />
+            <br />Wir werden uns schnellstmöglich mit deinem Anliegen befassen.
           </h7>
         </div>
       </div>
@@ -40,8 +63,8 @@
         <div class="foot-left">
           <a class="footer-icon hide-desktop-805" href="#">
             <img
-              class="logo-image"
-              src="./assets/img/Logo/Bestell App- Logo.svg"
+              class="footer-icon"
+              src="../assets/img/Logo/Bestell App- Logo.svg"
               alt="Bestell App Logo"
             />
           </a>
@@ -63,16 +86,19 @@
         <div class="foot-right">
           <div class="social-media">
             <a class="footer-icon-right" href="https://facebook.com">
-              <img src="./assets/img/icons/facebook_white.png" alt="Facebook" />
+              <img
+                src="../assets/img/icons/facebook_white.png"
+                alt="Facebook"
+              />
             </a>
             <a class="footer-icon-right" href="https://instagram.com">
               <img
-                src="./assets/img/icons/instagram_white.png"
+                src="../assets/img/icons/instagram_white.png"
                 alt="Instagram"
               />
             </a>
             <a class="footer-icon-right" href="https://x.com">
-              <img src="./assets/img/icons/twitter_white.png" alt="Twitter" />
+              <img src="../assets/img/icons/twitter_white.png" alt="Twitter" />
             </a>
           </div>
         </div>

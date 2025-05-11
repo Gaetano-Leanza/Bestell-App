@@ -3,113 +3,120 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AGB - Bookstore</title>
+    <title>Bestell App</title>
     <link rel="stylesheet" href="../styles/standard.css" />
+    <link rel="stylesheet" href="../styles/headerAndFooter.css" />
     <link rel="stylesheet" href="../styles/sites.css" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" />
   </head>
+
 
   <body>
     <header class="header">
       <div class="header-container">
-        <div class="header-container">
-          <img
-            class="logo-image"
-            src="./assets/img/Logo/Bestell App- Logo.svg"
-            alt="Bestell App Logo"
-          />
-        </div>
+        <img
+          class="header-icon"
+          src="../assets/img/Logo/Bestell App- Logo.svg"
+          alt="Bestell App Logo"
+        />
+
+        <button class="burger-menu" aria-label="Menü öffnen">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+
+        <nav class="header-nav">
+          <a href="#">Start</a>
+          <a href="#">Menü</a>
+          <a href="#">Kontakt</a>
+        </nav>
       </div>
     </header>
 
-    <main>
-      <section id="agb" class="content-1020px">
-        <h4>Allgemeine Geschäftsbedingungen (AGB)</h4>
+   <main class="agb">
+  <h4>Allgemeine Geschäftsbedingungen (AGB)</h4>
 
-        <h5>§ 1 Geltungsbereich</h5>
-        <p class="center-text">
-          Diese Allgemeinen Geschäftsbedingungen gelten für alle Bestellungen
-          über unseren Online-Shop unter der Domain www.bookstore.de.
-          Abweichende Bedingungen des Kunden erkennen wir nicht an.
-        </p>
+  <h5>§ 1 Geltungsbereich</h5>
+  <p class="center-text">
+    Diese Allgemeinen Geschäftsbedingungen gelten für alle Bestellungen über unseren Essenslieferservice unter der Domain www.Bestell-App.de.<br />
+    Abweichende Bedingungen der Kundinnen und Kunden erkennen wir nicht an, es sei denn, wir stimmen ihnen ausdrücklich schriftlich zu.
+  </p>
 
-        <h5>§ 2 Vertragsschluss</h5>
-        <p class="center-text">
-          Mit der Bestellung gibt der Kunde ein verbindliches Angebot auf
-          Abschluss eines Kaufvertrags ab.<br />
-          Wir behalten uns vor, das Angebot innerhalb von 5 Werktagen
-          anzunehmen.
-        </p>
+  <h5>§ 2 Vertragsschluss</h5>
+  <p class="center-text">
+    Mit Abschluss der Bestellung über unsere Plattform gibt der Kunde ein verbindliches Angebot zum Kauf der ausgewählten Speisen ab.<br />
+    Der Vertrag kommt zustande, sobald wir die Bestellung bestätigen oder mit der Zubereitung bzw. Auslieferung beginnen.
+  </p>
 
-        <h5>§ 3 Preise und Zahlungsbedingungen</h5>
-        <p class="center-text">
-          Alle Preise verstehen sich in Euro inklusive gesetzlicher
-          Mehrwertsteuer.<br />
-          Zahlungsmöglichkeiten: Vorkasse, PayPal, Kreditkarte<br />
-          Kontodaten für Vorkasse:<br />
-          Musterbank: IBAN: DE123456789 BIC: ABC23DEFG
-        </p>
+  <h5>§ 3 Preise und Zahlungsbedingungen</h5>
+  <p class="center-text">
+    Alle Preise verstehen sich in Euro inklusive der jeweils geltenden gesetzlichen Mehrwertsteuer.<br />
+    Akzeptierte Zahlungsmethoden: Vorkasse, PayPal, Kreditkarte, Barzahlung bei Lieferung (sofern verfügbar).<br />
+    Kontodaten für Vorkasse:<br />
+    Musterbank · IBAN: DE123456789 · BIC: ABC23DEFG
+  </p>
 
-        <p class="center-text"></p>
+  <h5>§ 4 Lieferung</h5>
+  <p class="center-text">
+    Die Lieferung erfolgt im Umkreis von bis zu 10 Kilometern ab unserem Standort.<br />
+    Lieferkosten:<br />
+    – bis 5 km: 3,99 €<br />
+    – über 5 km: 7,99 €<br />
+    Lieferzeiten können je nach Aufkommen und Verkehrsbedingungen variieren.
+  </p>
 
-        <h5>§ 4 Lieferung</h5>
-        <p class="center-text">
-          Lieferungen erfolgen weltweit. Die Versandkosten betragen:<br />
-          - Deutschland: 3,99 €<br />
-          - EU: 7,99 €<br />
-          - International: 12,99 €<br />
-          Lieferfrist: 3-5 Werktage nach Zahlungseingang
-        </p>
+  <h5>§ 5 Widerrufsrecht</h5>
+  <p class="center-text">
+    Bei schnell verderblichen Waren wie frisch zubereitetem Essen besteht gemäß § 312g Abs. 2 Nr. 1 BGB kein Widerrufsrecht.<br />
+    Sollte eine Lieferung fehlerhaft oder ungenießbar sein, wenden Sie sich bitte umgehend an unseren Kundenservice.
+  </p>
 
-        <h5>§ 5 Widerrufsrecht</h5>
-        <p class="center-text">
-          Sie haben das Recht, binnen 14 Tagen ohne Angabe von Gründen diesen
-          Vertrag zu widerrufen.<br />
-          Das Widerrufsformular finden Sie unter:
-          <a
-            href="https://www.bmj.de/DE/service/formulare/form_widerrufsrecht/form_widerrufsrecht_node.html"
-            class="imp-link"
-            target="_blank"
-            >Widerrufsbelehrung</a
-          >
-        </p>
+  <h5>§ 6 Gewährleistung</h5>
+  <p class="center-text">
+    Es gelten die gesetzlichen Gewährleistungsrechte, soweit anwendbar. Bei verderblichen Lebensmitteln ist eine Beanstandung sofort nach Lieferung erforderlich.
+  </p>
 
-        <h5>§ 6 Gewährleistung</h5>
-        <p class="center-text">
-          Die Gewährleistung richtet sich nach den gesetzlichen Bestimmungen.<br />
-          Bei gebrauchten Büchern beträgt die Gewährleistungsfrist 1 Jahr.
-        </p>
+  <h5>§ 7 Datenschutz</h5>
+  <p class="center-text">
+    Ihre personenbezogenen Daten werden ausschließlich zur Bestellabwicklung verwendet.<br />
+    Weitere Informationen finden Sie in unserer
+    <a
+      href="https://www.bundesregierung.de/breg-de/service/datenschutzhinweis/datenschutzerklaerung-1532494"
+      class="imp-link"
+      >Datenschutzerklärung</a
+    >.
+  </p>
 
-        <h5>§ 7 Datenschutz</h5>
-        <p class="center-text">
-          Ihre Daten werden ausschließlich zur Vertragsabwicklung
-          verarbeitet.<br />
-          Details entnehmen Sie bitte unserer
-          <a
-            href="https://www.bundesregierung.de/breg-de/service/datenschutzhinweis/datenschutzerklaerung-1532494"
-            class="imp-link"
-            >Datenschutzerklärung</a
-          >.
-        </p>
+  <h5>§ 8 Salvatorische Klausel</h5>
+  <p class="center-text">
+    Sollte eine Bestimmung dieser AGB unwirksam sein oder werden, bleibt die Gültigkeit der übrigen Bestimmungen davon unberührt.
+  </p>
 
-        <h5>§ 8 Salvatorische Klausel</h5>
-        <p class="center-text">
-          Sollte eine Bestimmung dieser AGB unwirksam sein, bleibt die
-          Gültigkeit der übrigen Bestimmungen unberührt.
-        </p>
+  <p>Stand: April 2025</p>
+</main>
 
-        <p>Stand: April 2025</p>
-      </section>
-    </main>
 
     <footer class="footer">
       <div class="footer-container">
         <div class="foot-left">
           <a class="footer-icon hide-desktop-805" href="#">
             <img
-              class="logo-image"
-              src="./assets/img/Logo/Bestell App- Logo.svg"
+              class="footer-icon"
+              src="../assets/img/Logo/Bestell App- Logo.svg"
               alt="Bestell App Logo"
             />
           </a>
@@ -131,16 +138,19 @@
         <div class="foot-right">
           <div class="social-media">
             <a class="footer-icon-right" href="https://facebook.com">
-              <img src="./assets/img/icons/facebook_white.png" alt="Facebook" />
+              <img
+                src="../assets/img/icons/facebook_white.png"
+                alt="Facebook"
+              />
             </a>
             <a class="footer-icon-right" href="https://instagram.com">
               <img
-                src="./assets/img/icons/instagram_white.png"
+                src="../assets/img/icons/instagram_white.png"
                 alt="Instagram"
               />
             </a>
             <a class="footer-icon-right" href="https://x.com">
-              <img src="./assets/img/icons/twitter_white.png" alt="Twitter" />
+              <img src="../assets/img/icons/twitter_white.png" alt="Twitter" />
             </a>
           </div>
         </div>

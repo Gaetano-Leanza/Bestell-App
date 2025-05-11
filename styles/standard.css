@@ -1,18 +1,18 @@
-html, body {
-  height: 100%;
+html,
+body {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Raleway-Regular", sans-serif;
   color: black;
-  scroll-behavior: smooth;
-  display: flex;          
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;      
+  min-height: 100vh;
   background-color: white;
 }
 
@@ -29,4 +29,32 @@ h1 {
   font-size: 40px;
   display: flex;
   justify-content: center;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
+h2 {
+  font-size: 20px;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
+h3 {
+  font-size: 20px;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
+h4 {
+  font-size: 17px;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
+h5 {
+  font-size: 17px;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
+@font-face {
+  font-family: "Economica";
+  src: url("../fonts/Raleway-static/Raleway-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

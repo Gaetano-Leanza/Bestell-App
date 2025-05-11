@@ -3,29 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bookstore</title>
-
+    <title>Bestell App</title>
     <link rel="stylesheet" href="../styles/standard.css" />
+    <link rel="stylesheet" href="../styles/headerAndFooter.css" />
     <link rel="stylesheet" href="../styles/sites.css" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" />
   </head>
+
   <body>
     <header class="header">
       <div class="header-container">
-        <div class="header-container">
-          <img
-            class="logo-image"
-            src="./assets/img/Logo/Bestell App- Logo.svg"
-            alt="Bestell App Logo"
-          />
-        </div>
+        <img
+          class="header-icon"
+          src="../assets/img/Logo/Bestell App- Logo.svg"
+          alt="Bestell App Logo"
+        />
+
+        <button class="burger-menu" aria-label="Menü öffnen">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+
+        <nav class="header-nav">
+          <a href="#">Start</a>
+          <a href="#">Menü</a>
+          <a href="#">Kontakt</a>
+        </nav>
       </div>
     </header>
 
     <body>
-      <section id="privacy-policy" class="content-1020px">
-        <h4>Datenschutz<br class="hide-desktop-320" />erklärung</h4>
+      <main class="privacy-policy">
+        <h4>Datenschutzerklärung</h4>
 
         <p class="center-text">
           Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer
@@ -79,19 +102,19 @@
         </p>
         <br /><br />
         <p>
-          <strong>BOOKSTORE</strong><br />
+          <strong>Bestell App</strong><br />
           <br />
           Chemnitzer Straße 29<br />
           59067 Hamm<br />
-          E-Mail:
-          <a class="link-width" href="mailto:bookstore@ncc-1701b.com"
+          E-Mail: bestellapp@outlook.de
+          <a class="link-width" href="mailto:bestellapp@ncc-1701b.com"
             >bookstore@ncc-1701b.com</a
           >
         </p>
 
         <br /><br />
         <p class="center-text">Stand: April 2025</p>
-      </section>
+      </main>
     </body>
 
     <footer class="footer">
@@ -99,8 +122,8 @@
         <div class="foot-left">
           <a class="footer-icon hide-desktop-805" href="#">
             <img
-              class="logo-image"
-              src="./assets/img/Logo/Bestell App- Logo.svg"
+              class="footer-icon"
+              src="../assets/img/Logo/Bestell App- Logo.svg"
               alt="Bestell App Logo"
             />
           </a>
@@ -122,16 +145,19 @@
         <div class="foot-right">
           <div class="social-media">
             <a class="footer-icon-right" href="https://facebook.com">
-              <img src="./assets/img/icons/facebook_white.png" alt="Facebook" />
+              <img
+                src="../assets/img/icons/facebook_white.png"
+                alt="Facebook"
+              />
             </a>
             <a class="footer-icon-right" href="https://instagram.com">
               <img
-                src="./assets/img/icons/instagram_white.png"
+                src="../assets/img/icons/instagram_white.png"
                 alt="Instagram"
               />
             </a>
             <a class="footer-icon-right" href="https://x.com">
-              <img src="./assets/img/icons/twitter_white.png" alt="Twitter" />
+              <img src="../assets/img/icons/twitter_white.png" alt="Twitter" />
             </a>
           </div>
         </div>
