@@ -21,7 +21,11 @@ main {
 }
 
 a {
-  color: white !important;
+  color: white;
+}
+
+p {
+  color: white;
 }
 
 h1 {

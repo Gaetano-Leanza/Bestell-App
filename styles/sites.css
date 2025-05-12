@@ -1,3 +1,20 @@
+.main-center {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 10vh;
+  box-sizing: border-box;
+}
+
+.main-center form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
 .agb {
   padding-left: 20px;
 }
@@ -9,11 +26,12 @@
 .impressum-text {
   padding-left: 20px;
 }
-a.imp-link {
+
+a.sites-link {
   color: #e63946 !important;
 }
 
-a.imp-link:hover {
+a.sites-link:hover {
   color: #5f32a8 !important;
 }
 
@@ -27,6 +45,7 @@ a.imp-link:hover {
 
 .center-text {
   font-size: 16px;
+  color: black;
 }
 
 #mail_sent h1 {
@@ -113,21 +132,4 @@ textarea:focus {
   to {
     transform: rotate(360deg);
   }
-}
-
-.main-center {
-  display: flex;
-  justify-content: center; /* horizontal zentrieren */
-  align-items: flex-start; /* vertikal oben ausrichten */
-  min-height: 100vh; /* gesamte Höhe */
-  padding-top: 10vh; /* Abstand vom oberen Rand (~oberes Drittel) */
-  box-sizing: border-box; /* Padding wird berücksichtigt */
-}
-
-.main-center form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
 }
