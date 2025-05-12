@@ -9,3 +9,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
     window.location.href = "send_mail.html"; // Weiterleitung zur Bestätigungsseite
   }, 1000); // 1 Sekunde simuliertes "Senden"
 });
+
+// Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
+// So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
+document.addEventListener("DOMContentLoaded", renderDishes);
