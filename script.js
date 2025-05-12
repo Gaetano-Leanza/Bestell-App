@@ -48,7 +48,7 @@ function renderDishes() {
     card.innerHTML = `
       <div class="dish-info">
         <h3>${dish.name}</h3>
-        <p>Preis: € ${dish.price.toFixed(2)}</p>
+        <p class="item">Preis: € ${dish.price.toFixed(2)}</p>
       </div>
       <div class="dish-image-wrapper">
         <img src="${dish.image}" alt="${dish.name}">
@@ -85,18 +85,20 @@ function renderCart() {
   // So bleibt die Anzeige beim Neuladen oder Hinzufügen aktuell und übersichtlich.
   cartSection.innerHTML = "<h2>Warenkorb</h2>";
   // Für jedes Element (item) im Array cart wird ein neues HTML-Element erstellt.
-  cart.forEach((item, index) => {
+  cart.forEach((item) => {
     // HTML-Element für das einzelne Gericht im Warenkorb erstellen.
     let cartItem = document.createElement("div");
     cartItem.classList.add("cart-item");
     // Inhalt des Warenkorb-Eintrags setzen. Zeigt den Namen des Gerichts (Pizza) und den Preis an.
     // toFixed(2) sorgt für zwei Nachkommastellen, z. B. „€ 7.90“.
     cartItem.innerHTML = ` 
-    <p>${item.name} – € ${item.price.toFixed(2)}</p>
+    <p class="item">${item.name} – € ${item.price.toFixed(2)}</p>
     `;
     // Element zum Warenkorb-Container hinzufügen.
     cartSection.appendChild(cartItem);
   });
 }
 
+// Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
+// So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
 document.addEventListener("DOMContentLoaded", renderDishes);
