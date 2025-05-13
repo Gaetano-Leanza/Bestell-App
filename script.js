@@ -1,4 +1,7 @@
+// Deklariert eine Variable namens cart einem leeren Array um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
 let cart = [];
+
+// JSON
 let dishes = [
   {
     id: 1,
@@ -15,13 +18,13 @@ let dishes = [
   {
     id: 3,
     name: "Pizza Funghi",
-    price: 18.9,
+    price: 14.9,
     image: "../assets/img/food/funghi.png",
   },
   {
     id: 4,
     name: "Pizza Hawaii",
-    price: 8.5,
+    price: 14.9,
     image: "../assets/img/food/hawaii.png",
   },
   {
@@ -67,38 +70,145 @@ function addToCart(dishId) {
   // .find() sucht das erste Gericht, dessen id mit dem übergebenen dishId übereinstimmt.
   // Das Ergebnis wird in der Variable dish gespeichert.
   let dish = dishes.find((d) => d.id === dishId);
-  // Gericht (Pizza) zum Warenkorb hinzufügen.
-  // Das gefundene Gericht (Pizza) wird an das Ende des Arrays cart angehängt.
-  cart.push(dish);
+  // Es wird geprüft, ob dieses Gericht bereits im Warenkorb (cart) enthalten ist.
+  // Wenn ja, wird das vorhandene Objekt in der Variable cartItem gespeichert.
+  // Wenn nicht, bleibt cartItem undefined.
+  let cartItem = cart.find((item) => item.id === dishId);
+  // Wenn das Gericht bereits im Warenkorb ist, dann wird die vorhandene Menge (quantity) einfach um 1 erhöht.
+  if (cartItem) {
+    cartItem.quantity++;
+  }
+  // Falls das Gericht noch nicht im Warenkorb ist, wird es dem cart hinzugefügt.
+  // Dabei wird eine neue Eigenschaft quantity: 1 mitgegeben. ...dish kopiert alle Eigenschaften des Gerichts (id, name, price, image) in ein neues Objekt.
+  else {
+    cart.push({ ...dish, quantity: 1 });
+  }
   // Gibt den aktuellen Inhalt des Warenkorbs im Browser-Entwicklertools-Fenster (Konsole) aus. (Praktisch zum Debuggen.)
   console.log(cart);
-  // Warenkorb neu anzeigen.
+  // Warenkorb wird neu anzgezeigt.
   renderCart();
 }
 
 // Diese Funktion zeigt den aktuellen Inhalt des Warenkorbs (cart) an – sie wird aufgerufen, wenn ein Gericht (Pizza) mit addToCart() hinzugefügt wurde.
 function renderCart() {
-  // Sucht im HTML nach dem Element mit der Klasse shopping-card.
-  // Dort wird später der Warenkorb-Inhalt eingefügt.
+  // Die Funktion sucht das HTML-Element mit der Klasse .shopping-card und aktualisiert dessen Inhalt.
   let cartSection = document.querySelector(".shopping-card");
-  // Löscht vorherige Inhalte in diesem Bereich. Fügt eine Überschrift „Warenkorb“ ein.
-  // So bleibt die Anzeige beim Neuladen oder Hinzufügen aktuell und übersichtlich.
-  cartSection.innerHTML = "<h2>Warenkorb</h2>";
-  // Für jedes Element (item) im Array cart wird ein neues HTML-Element erstellt.
-  cart.forEach((item) => {
-    // HTML-Element für das einzelne Gericht im Warenkorb erstellen.
-    let cartItem = document.createElement("div");
-    cartItem.classList.add("cart-item");
-    // Inhalt des Warenkorb-Eintrags setzen. Zeigt den Namen des Gerichts (Pizza) und den Preis an.
-    // toFixed(2) sorgt für zwei Nachkommastellen, z. B. „€ 7.90“.
-    cartItem.innerHTML = ` 
-    <p class="item">${item.name} – € ${item.price.toFixed(2)}</p>
-    `;
-    // Element zum Warenkorb-Container hinzufügen.
-    cartSection.appendChild(cartItem);
-  });
+  // // Falls das Element nicht existiert: Abbruch
+  if (!cartSection) return;
+  // Der HTML-String wird je nach Zustand des Warenkorbs (cart) aufgebaut:
+  let html = "<h2>Warenkorb</h2>";
+  // Leerer Warenkorb: Zeigt einen Hinweis an.
+  if (cart.length === 0) {
+    html += `<p class="item">Dein Warenkorb ist leer.</p>`;
+    // Befüllter Warenkorb: Listet alle Artikel auf (mithilfe der Template-Funktion buildCartItemHTML()).
+  } else {
+    // Hier wird die ausgelagerte Template-Funktion verwendet
+    html += cart.map((item) => buildCartItemHTML(item)).join("");
+
+    // Gesamtpreis berechnen und hinzufügen
+    let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    html += `<p class="item2"><strong>Gesamt: € ${total.toFixed(
+      2
+    )}</strong></p>`;
+  }
+  // Generiertes HTML in die Seite einfügen
+  cartSection.innerHTML = html;
+}
+
+// Diese Funktion generiert HTML-Code für das Warenkorb-Element.
+// Diese Funktion nimmt ein item-Objekt entgegen.
+function buildCartItemHTML(item) {
+  // Erzeugt ein div-Container-Element für den Warenkorb-Artikel.
+  return `
+    <div class="cart-item">
+      <p class="item">${item.name} – € ${(item.price * item.quantity).toFixed(
+    2
+  )}</p>
+      <div class="cart-controls">
+        <button class="remove-button-cart" onclick="decreaseQuantity(${
+          item.id
+        })">-</button>
+        <div class="item-number">${item.quantity}</div>
+        <button class="add-button-cart" onclick="increaseQuantity(${
+          item.id
+        })">+</button>
+        <button class="trash-button" onclick="removeFromCart(${
+          item.id
+        })">🗑️</button>
+      </div>
+    </div>
+  `;
+}
+
+// Diese Funktion wird aufgerufen, wenm man im Warenkorb auf den „+“-Button klickt.
+// Sie verringert die Menge (quantity) eines Gerichts (Pizza).
+function increaseQuantity(dishId) {
+  // Diese Zeile sucht im cart (Warenkorb) nach dem Gericht, das die passende ID hat.
+  // cart.find(...) durchsucht das Array und gibt das erste passende Element zurück.
+  // Wenn z. B. dishId = 2 ist, wird { id: 2, name: "Pizza Salami", quantity: 1 } gefunden.
+  let item = cart.find((d) => d.id === dishId);
+  // if (item) prüft, ob das gesuchte Gericht überhaupt im Warenkorb enthalten ist.
+  if (item) {
+    // item.quantity++ erhöht die Menge um 1.
+    item.quantity++;
+    // Warenkorb wird neu anzgezeigt.
+    renderCart();
+  }
+}
+
+// Diese Funktion wird aufgerufen, wenm man im Warenkorb auf den „-“-Button klickt.
+// Sie verringert die Menge (quantity) eines Gerichts (Pizza) oder entfernt es, wenn die Menge 0 erreicht.
+function decreaseQuantity(dishId) {
+  // Die Funktion sucht im cart-Array nach dem Gericht mit der passenden ID.
+  // Wird dieses Gericht gefunden, wird es in der Variable item gespeichert.
+  // Wenn es nicht im Warenkorb ist, bleibt item undefined.
+  let item = cart.find((d) => d.id === dishId);
+  // Wenn item existiert, wird seine Menge (quantity) um 1 reduziert.
+  if (item) {
+    item.quantity--;
+    // Wenn nach dem Reduzieren die Menge 0 oder kleiner ist, wird das Gericht (Pizza) vollständig aus dem Warenkorb gelöscht.
+    // Dafür wird einfach die Funktion removeFromCart(dishId) aufgerufen.
+    if (item.quantity <= 0) {
+      removeFromCart(dishId);
+      // Falls die Menge noch über 0 liegt, wird der Warenkorb einfach aktualisiert (neu gerendert), um die geänderte Menge anzuzeigen.
+    } else {
+      renderCart();
+    }
+  }
+}
+
+// Diese Funktion entfernt ein bestimmtes Gericht (Pizza) vollständig aus dem Warenkorb anhand seiner dishId.
+function removeFromCart(dishId) {
+  // Das Array cart wird neu definiert, und zwar so, dass alle Gerichte (Pizzen) außer dem gewünschten entfernt werden.
+  // filter() durchläuft alle Gerichte (Pizzen) im Warenkorb.
+  // Es behält nur die, bei denen d.id !== dishId ist – also alle außer dem mit der gesuchten ID.
+  //  Das Gericht mit der ID dishId wird somit gelöscht.
+  cart = cart.filter((d) => d.id !== dishId);
+  // Warenkorb wird neu anzgezeigt.
+  renderCart();
 }
 
 // Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
 // So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
-document.addEventListener("DOMContentLoaded", renderDishes);
+document.addEventListener("DOMContentLoaded", () => {
+  renderDishes();
+  renderCart(); // Cart initialisieren
+});
+
+// Event-Listener für das Kontakt-Formular
+// Überwacht das Absenden des Formulars mit der ID "contactForm"
+// Wird ausgelöst, wenn man auf "Senden" klickt
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  // Formular nicht wirklich abschicken
+  e.preventDefault();
+
+  // Spinner anzeigen
+  document.getElementById("spinner").style.display = "inline-block";
+
+  // Nach kurzer Zeit weiterleiten
+  setTimeout(function () {
+    // Weiterleitung zur Bestätigungsseite
+    window.location.href = "send_mail.html";
+    // 1 Sekunde simuliertes "Senden"
+  }, 1000);
+});

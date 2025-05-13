@@ -42,7 +42,8 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   box-shadow: -10px 0 15px -5px rgba(0, 0, 0, 0.3),
     10px 0 15px -5px rgba(0, 0, 0, 0.3);
   flex: 0 0 300px;
@@ -51,6 +52,23 @@
   top: 20px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.cart-item {
+  width: 100%;
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 10;
+}
+
+.item {
+  padding-left: 15px;
+}
+
+.item2 {
+  color: black;
+  width: 270px;
 }
 
 .pizza-logo {
@@ -82,6 +100,7 @@
   border: 2px solid #ccc;
   border-radius: 8px;
   padding: 12px;
+  padding-left: 0px;
   background-color: #f9f9f9;
   position: relative;
 }
@@ -127,7 +146,40 @@
   background-color: #cf711f;
 }
 
-.cart-item {
-  padding: 6px 0;
-  border-bottom: 1px solid #ddd;
+.add-button-cart, .remove-button-cart {
+  background-color: #e67e22;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+}
+
+.trash-button {
+  background-color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.cart-controls button {
+  padding: 4px 8px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.item-number {
+  padding-left: 15px;
 }
