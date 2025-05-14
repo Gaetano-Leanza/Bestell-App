@@ -1,4 +1,4 @@
-// Deklariert eine Variable namens cart einem leeren Array um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
+// Deklariert eine Variable namens cart, einem leeren Array um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
 let cart = [];
 
 // JSON

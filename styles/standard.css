@@ -20,6 +20,11 @@ main {
   flex: 1;
 }
 
+main.layout {
+  display: flex;
+  flex: 1;
+}
+
 a {
   color: white;
 }
