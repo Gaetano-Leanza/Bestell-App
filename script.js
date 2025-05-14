@@ -1,4 +1,4 @@
-// Deklariert eine Variable namens cart, einem leeren Array um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
+// Deklariert eine Variable namens cart, einem leeren Array, um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
 let cart = [];
 
 // JSON
@@ -96,7 +96,7 @@ function renderCart() {
   // // Falls das Element nicht existiert: Abbruch
   if (!cartSection) return;
   // Der HTML-String wird je nach Zustand des Warenkorbs (cart) aufgebaut:
-  let html = "<h2>Warenkorb</h2>";
+  let html = "<h6>Warenkorb</h6>";
   // Leerer Warenkorb: Zeigt einen Hinweis an.
   if (cart.length === 0) {
     html += `<p class="item">Dein Warenkorb ist leer.</p>`;
@@ -104,7 +104,6 @@ function renderCart() {
   } else {
     // Hier wird die ausgelagerte Template-Funktion verwendet
     html += cart.map((item) => buildCartItemHTML(item)).join("");
-
     // Gesamtpreis berechnen und hinzufügen
     let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     html += `<p class="item2"><strong>Gesamt: € ${total.toFixed(
@@ -188,12 +187,36 @@ function removeFromCart(dishId) {
   renderCart();
 }
 
+
+
 // Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
 // So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
 document.addEventListener("DOMContentLoaded", () => {
   renderDishes();
   renderCart(); // Cart initialisieren
 });
+
+document.querySelector('.cart-toggle-button').addEventListener('click', () => {
+  const cartElement = document.querySelector('.shopping-card');
+  const isActive = cartElement.classList.toggle('active');
+
+  if (window.innerWidth > 900) {
+    cartElement.classList.toggle('overlay');
+  }
+
+  const toggleButton = document.querySelector('.cart-toggle-button');
+  toggleButton.textContent = isActive ? 'Warenkorb schließen' : 'Warenkorb';
+});
+
+// Klick auf Hintergrund (außerhalb des Inhalts) schließt Overlay
+document.addEventListener('click', function (e) {
+  const cart = document.querySelector('.shopping-card.overlay');
+  if (cart && !cart.contains(e.target) && !e.target.classList.contains('cart-toggle-button')) {
+    cart.classList.remove('overlay');
+  }
+});
+
+
 
 // Event-Listener für das Kontakt-Formular
 // Überwacht das Absenden des Formulars mit der ID "contactForm"

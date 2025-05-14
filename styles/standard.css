@@ -68,6 +68,13 @@ h5 {
   font-family: "Raleway-Regular", sans-serif;
 }
 
+h6 {
+  font-size: 30px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-family: "Raleway-Regular", sans-serif;
+}
+
 @font-face {
   font-family: "Economica";
   src: url("../fonts/Raleway-static/Raleway-Regular.ttf") format("truetype");
