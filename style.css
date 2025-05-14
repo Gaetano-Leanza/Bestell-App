@@ -21,7 +21,7 @@
 .layout {
   display: flex;
   gap: 20px;
-  min-height: calc(100vh - 120px); /* Header + Footer Höhe abziehen */
+  min-height: calc(100vh - 120px);
   position: relative;
 }
 
@@ -193,11 +193,58 @@
   border-radius: 8px;
 }
 
+.order-button {
+  background: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  position: sticky;
+  bottom: 20px;
+  margin: 20px auto;
+  width: 200px;
+  transition: all 0.3s ease;
+  z-index: 1001; 
+}
+
+.order-button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+.order-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1002;
+  animation: slideIn 0.3s ease-out;
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
 @media (max-width: 900px) {
   .shopping-card {
-  transform: translateX(100%);
-  transition: transform 0.3s ease; 
-  position: fixed;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -210,13 +257,8 @@
   }
 
   .shopping-card.active {
-  transform: translateX(0);
+    transform: translateX(0);
   }
-
-
-
-
-
 
   .cart-toggle-button {
     display: block;
@@ -232,7 +274,7 @@
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-    transition: all 0.3s ease-in-out; /* Erweitert die Transition auf alle Eigenschaften */
+    transition: all 0.3s ease-in-out;
     width: 95%;
   }
 
@@ -276,12 +318,11 @@
     z-index: 10;
   }
 
-.item2 {
-  color: black;
-  width: 100%;
-  padding-left: 40px;
-}
-
+  .item2 {
+    color: black;
+    width: 100%;
+    padding-left: 40px;
+  }
 }
 
 @media (min-width: 901px) {

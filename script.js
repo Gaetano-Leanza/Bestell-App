@@ -95,22 +95,27 @@ function renderCart() {
   let cartSection = document.querySelector(".shopping-card");
   // // Falls das Element nicht existiert: Abbruch
   if (!cartSection) return;
-  // Der HTML-String wird je nach Zustand des Warenkorbs (cart) aufgebaut:
+
+  // Ein Überschriftselement wird erzeugt, das über dem Warenkorb steht.
   let html = "<h6>Warenkorb</h6>";
   // Leerer Warenkorb: Zeigt einen Hinweis an.
   if (cart.length === 0) {
     html += `<p class="item">Dein Warenkorb ist leer.</p>`;
     // Befüllter Warenkorb: Listet alle Artikel auf (mithilfe der Template-Funktion buildCartItemHTML()).
   } else {
-    // Hier wird die ausgelagerte Template-Funktion verwendet
+    // Hier wird die ausgelagerte Template-Funktion verwendet.
+    // Jedes Produkt wird mit der externen Funktion buildCartItemHTML() in HTML umgewandelt.
     html += cart.map((item) => buildCartItemHTML(item)).join("");
-    // Gesamtpreis berechnen und hinzufügen
+    // Gesamtpreis berechnen und hinzufügen. Preis mal Menge jedes Artikels.
     let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    // Der Gesamtpreis wird formatiert (z. B. "9.99" statt "9.987") und angezeigt.
     html += `<p class="item2"><strong>Gesamt: € ${total.toFixed(
       2
     )}</strong></p>`;
+    // Ein Bestell-Button wird eingefügt.
+    html += `<button class="order-button">Bestellen</button>`;
   }
-  // Generiertes HTML in die Seite einfügen
+  // Der gesamte HTML-Code wird schließlich in das .shopping-card-Element geschrieben.
   cartSection.innerHTML = html;
 }
 
@@ -187,7 +192,29 @@ function removeFromCart(dishId) {
   renderCart();
 }
 
+// Diese Funktion simuliert das Abschicken einer Bestellung.
+function placeOrder() {
+  // Bestellbestätigung erzeugen und anzeigen
+  let confirmation = document.createElement("div");
+  confirmation.className = "order-confirmation";
+  confirmation.innerHTML = `
+    <h3>Vielen Dank für Ihre Bestellung!</h3>
+    <p>Ihr Warenkorb wurde geleert.</p>
+  `;
 
+  document.body.appendChild(confirmation);
+  confirmation.style.display = "block";
+
+  // Warenkorb leeren
+  cart = [];
+  renderCart();
+
+  // Meldung nach 3 Sekenden ausblenden
+  setTimeout(() => {
+    confirmation.style.animation = "slideOut 0.3s ease-in";
+    setTimeout(() => confirmation.remove(), 300);
+  }, 3000);
+}
 
 // Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
 // So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
@@ -196,27 +223,78 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCart(); // Cart initialisieren
 });
 
-document.querySelector('.cart-toggle-button').addEventListener('click', () => {
-  const cartElement = document.querySelector('.shopping-card');
-  const isActive = cartElement.classList.toggle('active');
-
+// Dieser Event-Listener sorgt dafür, dass der Warenkorb ein- oder ausgeblendet wird, wenn man auf einen Button klickt.
+// Ein Klick-Ereignis wird registriert auf dem Button mit der Klasse .cart-toggle-button.
+// Beim Klick wird die folgende Funktion ausgeführt (eine anonyme Pfeilfunktion).
+document.querySelector(".cart-toggle-button").addEventListener("click", () => {
+  // Der Warenkorb-Bereich (Element mit Klasse .shopping-card) wird in die Variable cartElement gespeichert.
+  let cartElement = document.querySelector(".shopping-card");
+  // Die CSS-Klasse active wird beim Warenkorb-Element umgeschaltet (also hinzugefügt, wenn sie fehlt, oder entfernt, wenn sie da ist).
+  // Das Ergebnis (true oder false) zeigt an, ob active nach dem Umschalten aktiv ist.
+  let isActive = cartElement.classList.toggle("active");
+  // Wenn das Browserfenster breiter als 900 Pixel ist, wird zusätzlich die CSS-Klasse overlay umgeschaltet.
   if (window.innerWidth > 900) {
-    cartElement.classList.toggle('overlay');
+    cartElement.classList.toggle("overlay");
   }
-
-  const toggleButton = document.querySelector('.cart-toggle-button');
-  toggleButton.textContent = isActive ? 'Warenkorb schließen' : 'Warenkorb';
+  // Der Text auf dem Button wird abhängig vom aktuellen Status geändert:
+  // Wenn der Warenkorb aktiv ist → Button-Text: „Warenkorb schließen“
+  // Wenn der Warenkorb inaktiv ist → Button-Text: „Warenkorb“
+  let toggleButton = document.querySelector(".cart-toggle-button");
+  toggleButton.textContent = isActive ? "Warenkorb schließen" : "Warenkorb";
 });
 
 // Klick auf Hintergrund (außerhalb des Inhalts) schließt Overlay
-document.addEventListener('click', function (e) {
-  const cart = document.querySelector('.shopping-card.overlay');
-  if (cart && !cart.contains(e.target) && !e.target.classList.contains('cart-toggle-button')) {
-    cart.classList.remove('overlay');
+// Es wird ein globaler Klick-Listener auf das gesamte Dokument gesetzt.
+// Jedes Mal, wenn irgendwo auf der Seite geklickt wird, wird die Funktion aufgerufen.
+// e ist das Klick-Ereignis-Objekt (für Details wie welches Element angeklickt wurde).
+document.addEventListener("click", function (e) {
+  // Es wird nach einem geöffneten Warenkorb im Overlay-Modus gesucht – also einem Element mit den Klassen .shopping-card und .overlay.
+  // Falls kein solcher Warenkorb existiert (z. B. geschlossen oder nicht im Overlay-Modus), ist cart = null.
+  let cart = document.querySelector(".shopping-card.overlay");
+  // Diese Bedingung prüft drei Dinge:
+  // 1. cart existiert – es gibt einen offenen Overlay-Warenkorb.
+  // 2. Der Klick war nicht innerhalb des Warenkorbs (!cart.contains(e.target)).
+  // 3. Der Klick war nicht auf den Toggle-Button (!e.target.classList.contains("cart-toggle-button")).
+  // Nur wenn all das zutrifft → Warenkorb schließen.
+  if (
+    cart &&
+    !cart.contains(e.target) &&
+    !e.target.classList.contains("cart-toggle-button")
+  ) {
+    cart.classList.remove("overlay");
   }
 });
 
+// Bestellfunktion
+document
+  // Diese Zeile sucht im HTML-Dokument nach einem Element mit der CSS-Klasse .shopping-card.
+  .querySelector(".shopping-card")
+  // Hier wird ein Event Listener hinzugefügt, so dass JavaScript auf Klicks innerhalb dieses Elements (.shopping-card) reagiert.
+  // function (e) { ... } ist die Funktion, die ausgeführt wird, wenn geklickt wird.
+  // e ist das Event-Objekt, das Infos über den Klick enthält.
+  .addEventListener("click", function (e) {
+    // e.target ist das konkret angeklickte Element. Diese Zeile prüft: Hat dieses Element die Klasse order-button?
+    // Wenn ja, dann wird die Funktion placeOrder() aufgerufen. Sie führt die Bestellung aus. 
+    if (e.target.classList.contains("order-button")) {
+      placeOrder();
+    }
+  });
 
+// Animation für das Ausblenden
+let style = document.createElement("style");
+style.textContent = `
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+  }
+`;
+document.head.appendChild(style);
 
 // Event-Listener für das Kontakt-Formular
 // Überwacht das Absenden des Formulars mit der ID "contactForm"
