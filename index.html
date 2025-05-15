@@ -63,22 +63,35 @@
           <h1>Food Palace ★★★★☆</h1>
           <h4>Leckeres Essen • € 2,90 Lieferkosten • 30-40 Min.</h4>
           <h4>Die beste Küche der Stadt seit 1999</h4>
-        </div>
+          <nav class="dish-slider">
+            <a href="#pizzen">Pizzen</a>
+            <a href="#salate">Salate</a>
+            <a href="#getraenke">Getränke</a>
+          </nav>
 
-        <div id="dish-container"></div>
+          <section id="dish-container">
+            <h2 id="pizzen">Pizzen</h2>
+            <div id="pizzas" class="dish-section"></div>
+
+            <h2 id="salate">Salate</h2>
+            <div id="salads" class="dish-section"></div>
+
+            <h2 id="getraenke">Getränke</h2>
+            <div id="drinks" class="dish-section"></div>
+          </section>
+        </div>
       </section>
 
       <section class="shopping-card" id="cart">
         <div class="shopping-card-content">
-          <h2>Warenkorb</h2>
+          <h6>Warenkorb</h6>
           <div id="cart-items-container"></div>
         </div>
+        <button class="order-button" style="display: none">Bestellen</button>
       </section>
     </main>
 
-    <button class="cart-toggle-button">
-      Warenkorb (<span class="cart-count">0</span>)
-    </button>
+    <button class="cart-toggle-button">Warenkorb</button>
 
     <footer class="footer">
       <div class="footer-container">

@@ -1,53 +1,116 @@
-// Deklariert eine Variable namens cart, einem leeren Array, um Werte oder Objekte aufzunehmen (die Artikel im Warenkorb).
 let cart = [];
 
-// JSON
-let dishes = [
-  {
-    id: 1,
-    name: "Pizza Margherita",
-    price: 9.9,
-    image: "../assets/img/food/margherita.png",
-  },
-  {
-    id: 2,
-    name: "Pizza Salami",
-    price: 12.5,
-    image: "../assets/img/food/salami.png",
-  },
-  {
-    id: 3,
-    name: "Pizza Funghi",
-    price: 14.9,
-    image: "../assets/img/food/funghi.png",
-  },
-  {
-    id: 4,
-    name: "Pizza Hawaii",
-    price: 14.9,
-    image: "../assets/img/food/hawaii.png",
-  },
-  {
-    id: 5,
-    name: "Pizza Quattro Formaggi",
-    price: 11.9,
-    image: "../assets/img/food/quattro formaggi.png",
-  },
-];
+const dishes = {
+  pizzas: [
+    {
+      id: 1,
+      name: "Pizza Margherita",
+      price: 9.9,
+      image: "../assets/img/food/margherita.jpg",
+    },
+    {
+      id: 2,
+      name: "Pizza Salami",
+      price: 12.5,
+      image: "../assets/img/food/salami.jpg",
+    },
+    {
+      id: 3,
+      name: "Pizza Funghi",
+      price: 14.9,
+      image: "../assets/img/food/funghi.jpg",
+    },
+    {
+      id: 4,
+      name: "Pizza Hawaii",
+      price: 14.9,
+      image: "../assets/img/food/hawaii.jpg",
+    },
+    {
+      id: 5,
+      name: "Pizza Quattro Formaggi",
+      price: 11.9,
+      image: "../assets/img/food/Quattro Formaggi.jpg",
+    },
+  ],
+  salads: [
+    {
+      id: 6,
+      name: "Caesar Salad",
+      price: 7.9,
+      image: "../assets/img/food/caesar.jpg",
+    },
+    {
+      id: 7,
+      name: "Griechischer Salat",
+      price: 8.5,
+      image: "../assets/img/food/greek.jpg",
+    },
+    {
+      id: 8,
+      name: "Bunter Salat",
+      price: 6.9,
+      image: "../assets/img/food/mixed.jpg",
+    },
+    {
+      id: 9,
+      name: "Thunfischsalat",
+      price: 8.9,
+      image: "../assets/img/food/tuna.jpg",
+    },
+    {
+      id: 10,
+      name: "Mozzarella-Tomate",
+      price: 7.5,
+      image: "../assets/img/food/mozzarella.jpg",
+    },
+  ],
+  drinks: [
+    {
+      id: 11,
+      name: "Cola 0,5l",
+      price: 2.5,
+      image: "../assets/img/food/cola.jpg",
+    },
+    {
+      id: 12,
+      name: "Wasser 0,5l",
+      price: 1.9,
+      image: "../assets/img/food/water.jpg",
+    },
+    {
+      id: 13,
+      name: "Apfelschorle 0,5l",
+      price: 2.2,
+      image: "../assets/img/food/apfelschorle.jpg",
+    },
+    {
+      id: 14,
+      name: "Fanta 0,5l",
+      price: 2.5,
+      image: "../assets/img/food/fanta.jpg",
+    },
+    {
+      id: 15,
+      name: "Sprite 0,5l",
+      price: 2.5,
+      image: "../assets/img/food/sprite.jpg",
+    },
+  ],
+};
 
-// Diese Funktion namens renderDishes() wird verwendet, um alle Gerichte (aus dem Array dishes) dynamisch im HTML anzuzeigen.
 function renderDishes() {
-  // Es wird eine Varialbe namens Container definiert, die im HTML nach dem Element mit der id="dish-container" sucht.
-  let container = document.getElementById("dish-container");
-  // Löscht zuerst alle Inhalte im Container, bevor neue Gerichte eingefügt werden.
-  // Dadurch wird sichergestellt, dass der Inhalt nicht doppelt gerendert wird, falls renderDishes() mehrmals aufgerufen wird.
+  ["pizzas", "salads", "drinks"].forEach(renderSection);
+}
+
+function renderSection(section) {
+  const container = document.getElementById(section);
+  if (!container) return;
+
   container.innerHTML = "";
-  // Iteriert durch jedes Objekt im dishes-Array (z. B. Pizza Margherita, Pizza Salami usw.).
-  dishes.forEach((dish) => {
-    // Für jedes Gericht wird eine Art „Karte“ (eine div) erstellt.
-    let card = document.createElement("div");
+  dishes[section].forEach((dish) => {
+    const card = document.createElement("div");
     card.classList.add("dish-card");
-    // Inhalt der Karte (Template) wird festgelegt.
     card.innerHTML = `
       <div class="dish-info">
         <h3>${dish.name}</h3>
@@ -58,66 +121,70 @@ function renderDishes() {
         <button class="add-button" onclick="addToCart(${dish.id})">+</button>
       </div>
     `;
-    // Template (card) in den Container einfügen
     container.appendChild(card);
   });
 }
 
-// Diese Funktion wird aufgerufen, wenn man auf den „+“-Button bei einem Gericht klickt. Sie fügt das ausgewählte Gericht dem Warenkorb (cart) hinzu.
 function addToCart(dishId) {
-  // Gericht (Pizza) mit passender ID finden.
-  // dishes ist das Array mit allen verfügbaren Gerichten (Pizzen).
-  // .find() sucht das erste Gericht, dessen id mit dem übergebenen dishId übereinstimmt.
-  // Das Ergebnis wird in der Variable dish gespeichert.
-  let dish = dishes.find((d) => d.id === dishId);
-  // Es wird geprüft, ob dieses Gericht bereits im Warenkorb (cart) enthalten ist.
-  // Wenn ja, wird das vorhandene Objekt in der Variable cartItem gespeichert.
-  // Wenn nicht, bleibt cartItem undefined.
-  let cartItem = cart.find((item) => item.id === dishId);
-  // Wenn das Gericht bereits im Warenkorb ist, dann wird die vorhandene Menge (quantity) einfach um 1 erhöht.
+  const allDishes = [...dishes.pizzas, ...dishes.salads, ...dishes.drinks];
+  const dish = allDishes.find((d) => d.id === dishId);
+  if (!dish) return;
+
+  const cartItem = cart.find((item) => item.id === dishId);
   if (cartItem) {
     cartItem.quantity++;
-  }
-  // Falls das Gericht noch nicht im Warenkorb ist, wird es dem cart hinzugefügt.
-  // Dabei wird eine neue Eigenschaft quantity: 1 mitgegeben. ...dish kopiert alle Eigenschaften des Gerichts (id, name, price, image) in ein neues Objekt.
-  else {
+  } else {
     cart.push({ ...dish, quantity: 1 });
   }
-  // Gibt den aktuellen Inhalt des Warenkorbs im Browser-Entwicklertools-Fenster (Konsole) aus. (Praktisch zum Debuggen.)
-  console.log(cart);
-  // Warenkorb wird neu anzgezeigt.
   renderCart();
 }
 
-// Diese Funktion zeigt den aktuellen Inhalt des Warenkorbs (cart) an – sie wird aufgerufen, wenn ein Gericht (Pizza) mit addToCart() hinzugefügt wurde.
 function renderCart() {
-  // Die Funktion sucht das HTML-Element mit der Klasse .shopping-card und aktualisiert dessen Inhalt.
-  let cartSection = document.querySelector(".shopping-card");
-  // // Falls das Element nicht existiert: Abbruch
-  if (!cartSection) return;
-  // Der HTML-String wird je nach Zustand des Warenkorbs (cart) aufgebaut:
-  let html = "<h6>Warenkorb</h6>";
-  // Leerer Warenkorb: Zeigt einen Hinweis an.
+  const cartSection = document.querySelector(".shopping-card");
+  const cartItemsContainer = document.getElementById("cart-items-container");
+  if (!cartSection || !cartItemsContainer) return;
+
+  cartItemsContainer.innerHTML = "";
+
   if (cart.length === 0) {
-    html += `<p class="item">Dein Warenkorb ist leer.</p>`;
-    // Befüllter Warenkorb: Listet alle Artikel auf (mithilfe der Template-Funktion buildCartItemHTML()).
-  } else {
-    // Hier wird die ausgelagerte Template-Funktion verwendet
-    html += cart.map((item) => buildCartItemHTML(item)).join("");
-    // Gesamtpreis berechnen und hinzufügen
-    let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    html += `<p class="item2"><strong>Gesamt: € ${total.toFixed(
-      2
-    )}</strong></p>`;
+    cartItemsContainer.innerHTML = `<p class="item cart-empty-message">Dein Warenkorb ist leer.</p>`;
+    return;
   }
-  // Generiertes HTML in die Seite einfügen
-  cartSection.innerHTML = html;
+
+  const cartHTML = buildCartItemsHTML(cart);
+  cartItemsContainer.innerHTML = cartHTML;
 }
 
-// Diese Funktion generiert HTML-Code für das Warenkorb-Element.
-// Diese Funktion nimmt ein item-Objekt entgegen.
+function buildCartItemsHTML(cart) {
+  let subtotal = 0;
+  let html = "";
+
+  cart.forEach((item) => {
+    subtotal += item.price * item.quantity;
+    html += buildCartItemHTML(item);
+  });
+
+  html += buildCartSummaryHTML(subtotal);
+  return html;
+}
+
+function buildCartSummaryHTML(subtotal) {
+  const lieferkosten = 2.9;
+  const gesamtsumme = subtotal + lieferkosten;
+  return `
+  <div class="cart-summary">
+    <hr>
+    <p class="item summary-line">Zwischensumme: € ${subtotal.toFixed(2)}</p>
+    <p class="item summary-line">Lieferkosten: € ${lieferkosten.toFixed(2)}</p>
+    <p class="item summary-total">
+      <strong>Gesamtsumme: € ${gesamtsumme.toFixed(2)}</strong>
+    </p>
+    <button class="order-button">Bestellen</button>
+  </div>
+`;
+}
+
 function buildCartItemHTML(item) {
-  // Erzeugt ein div-Container-Element für den Warenkorb-Artikel.
   return `
     <div class="cart-item">
       <p class="item">${item.name} – € ${(item.price * item.quantity).toFixed(
@@ -139,99 +206,105 @@ function buildCartItemHTML(item) {
   `;
 }
 
-// Diese Funktion wird aufgerufen, wenm man im Warenkorb auf den „+“-Button klickt.
-// Sie verringert die Menge (quantity) eines Gerichts (Pizza).
 function increaseQuantity(dishId) {
-  // Diese Zeile sucht im cart (Warenkorb) nach dem Gericht, das die passende ID hat.
-  // cart.find(...) durchsucht das Array und gibt das erste passende Element zurück.
-  // Wenn z. B. dishId = 2 ist, wird { id: 2, name: "Pizza Salami", quantity: 1 } gefunden.
-  let item = cart.find((d) => d.id === dishId);
-  // if (item) prüft, ob das gesuchte Gericht überhaupt im Warenkorb enthalten ist.
+  const item = cart.find((d) => d.id === dishId);
   if (item) {
-    // item.quantity++ erhöht die Menge um 1.
     item.quantity++;
-    // Warenkorb wird neu anzgezeigt.
     renderCart();
   }
 }
 
-// Diese Funktion wird aufgerufen, wenm man im Warenkorb auf den „-“-Button klickt.
-// Sie verringert die Menge (quantity) eines Gerichts (Pizza) oder entfernt es, wenn die Menge 0 erreicht.
 function decreaseQuantity(dishId) {
-  // Die Funktion sucht im cart-Array nach dem Gericht mit der passenden ID.
-  // Wird dieses Gericht gefunden, wird es in der Variable item gespeichert.
-  // Wenn es nicht im Warenkorb ist, bleibt item undefined.
-  let item = cart.find((d) => d.id === dishId);
-  // Wenn item existiert, wird seine Menge (quantity) um 1 reduziert.
+  const item = cart.find((d) => d.id === dishId);
   if (item) {
     item.quantity--;
-    // Wenn nach dem Reduzieren die Menge 0 oder kleiner ist, wird das Gericht (Pizza) vollständig aus dem Warenkorb gelöscht.
-    // Dafür wird einfach die Funktion removeFromCart(dishId) aufgerufen.
     if (item.quantity <= 0) {
       removeFromCart(dishId);
-      // Falls die Menge noch über 0 liegt, wird der Warenkorb einfach aktualisiert (neu gerendert), um die geänderte Menge anzuzeigen.
     } else {
       renderCart();
     }
   }
 }
 
-// Diese Funktion entfernt ein bestimmtes Gericht (Pizza) vollständig aus dem Warenkorb anhand seiner dishId.
 function removeFromCart(dishId) {
-  // Das Array cart wird neu definiert, und zwar so, dass alle Gerichte (Pizzen) außer dem gewünschten entfernt werden.
-  // filter() durchläuft alle Gerichte (Pizzen) im Warenkorb.
-  // Es behält nur die, bei denen d.id !== dishId ist – also alle außer dem mit der gesuchten ID.
-  //  Das Gericht mit der ID dishId wird somit gelöscht.
   cart = cart.filter((d) => d.id !== dishId);
-  // Warenkorb wird neu anzgezeigt.
   renderCart();
 }
 
+function placeOrder() {
+  const confirmation = document.createElement("div");
+  confirmation.className = "order-confirmation";
+  confirmation.innerHTML = `
+    <h7>Vielen Dank für Ihre Bestellung!</h7>
+    <p class="item">Ihr Warenkorb wurde geleert.</p>
+  `;
+  document.body.appendChild(confirmation);
+  confirmation.style.display = "block";
 
+  cart = [];
+  renderCart();
 
-// Wenn die Webseite vollständig geladen ist, wird automatisch die Funktion renderDishes() aufgerufen.
-// So wird das Menü mit den Gerichten sofort beim Laden der Seite angezeigt.
+  setTimeout(() => {
+    confirmation.style.animation = "slideOut 0.3s ease-in";
+    setTimeout(() => confirmation.remove(), 300);
+  }, 3000);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderDishes();
-  renderCart(); // Cart initialisieren
+  renderCart();
 });
 
-document.querySelector('.cart-toggle-button').addEventListener('click', () => {
-  const cartElement = document.querySelector('.shopping-card');
-  const isActive = cartElement.classList.toggle('active');
+const cartToggle = document.querySelector(".cart-toggle-button");
+if (cartToggle) {
+  cartToggle.addEventListener("click", () => {
+    const cartElement = document.querySelector(".shopping-card");
+    if (!cartElement) return;
+    const isActive = cartElement.classList.toggle("active");
+    if (window.innerWidth > 900) {
+      cartElement.classList.toggle("overlay");
+    }
+    cartToggle.textContent = isActive ? "Warenkorb schließen" : "Warenkorb";
+  });
+}
 
-  if (window.innerWidth > 900) {
-    cartElement.classList.toggle('overlay');
+document.addEventListener("click", function (e) {
+  const cartOverlay = document.querySelector(".shopping-card.overlay");
+  if (
+    cartOverlay &&
+    !cartOverlay.contains(e.target) &&
+    !e.target.classList.contains("cart-toggle-button")
+  ) {
+    cartOverlay.classList.remove("overlay");
   }
-
-  const toggleButton = document.querySelector('.cart-toggle-button');
-  toggleButton.textContent = isActive ? 'Warenkorb schließen' : 'Warenkorb';
 });
 
-// Klick auf Hintergrund (außerhalb des Inhalts) schließt Overlay
-document.addEventListener('click', function (e) {
-  const cart = document.querySelector('.shopping-card.overlay');
-  if (cart && !cart.contains(e.target) && !e.target.classList.contains('cart-toggle-button')) {
-    cart.classList.remove('overlay');
+document
+  .querySelector(".shopping-card")
+  ?.addEventListener("click", function (e) {
+    if (e.target.classList.contains("order-button")) {
+      placeOrder();
+    }
+  });
+
+const style = document.createElement("style");
+style.textContent = `
+  @keyframes slideOut {
+    from { opacity: 1; transform: translate(-50%, -50%); }
+    to { opacity: 0; transform: translate(-50%, -40%); }
   }
-});
+`;
+document.head.appendChild(style);
 
-
-
-// Event-Listener für das Kontakt-Formular
-// Überwacht das Absenden des Formulars mit der ID "contactForm"
-// Wird ausgelöst, wenn man auf "Senden" klickt
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  // Formular nicht wirklich abschicken
-  e.preventDefault();
-
-  // Spinner anzeigen
-  document.getElementById("spinner").style.display = "inline-block";
-
-  // Nach kurzer Zeit weiterleiten
-  setTimeout(function () {
-    // Weiterleitung zur Bestätigungsseite
-    window.location.href = "send_mail.html";
-    // 1 Sekunde simuliertes "Senden"
-  }, 1000);
-});
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    document
+      .getElementById("spinner")
+      ?.style?.setProperty("display", "inline-block");
+    setTimeout(() => {
+      window.location.href = "send_mail.html";
+    }, 1000);
+  });
+}

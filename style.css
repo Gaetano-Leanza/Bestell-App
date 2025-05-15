@@ -5,23 +5,18 @@
 
 .foot-content {
   width: 100%;
-  object-fit: cover;
-  flex: 0 0 80%;
   padding: 10px;
-}
-
-.foot-content {
   position: relative;
-  width: 100%;
-  padding: 10px;
   display: flex;
   justify-content: center;
+  object-fit: cover;
+  flex: 0 0 80%;
 }
 
 .layout {
   display: flex;
   gap: 20px;
-  min-height: calc(100vh - 120px); /* Header + Footer Höhe abziehen */
+  min-height: calc(100vh - 120px);
   position: relative;
 }
 
@@ -29,6 +24,16 @@
   flex: 1;
   position: relative;
   max-width: 80%;
+}
+
+.cart-empty-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.shopping-card-content h6 {
+  text-align: center;
 }
 
 .shopping-card {
@@ -47,10 +52,41 @@
   overflow-y: auto;
 }
 
+.item.cart-empty-message {
+  padding: 0 !important;
+  margin: 10px 0 !important;
+  text-align: center;
+  color: #666;
+}
+
 .shopping-card-content {
   width: 100%;
   flex: 1;
   padding: 0 10px;
+  padding-bottom: 20px;
+}
+
+.cart-summary {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.order-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+  width: 200px;
+  padding: 12px;
+  margin: 20px auto 0 auto;
+  text-align: center;
+}
+
+.order-button:hover {
+  background: #218838;
 }
 
 .cart-item {
@@ -68,6 +104,11 @@
 .item2 {
   color: black;
   width: 270px;
+}
+
+.summary-total {
+  text-align: left;
+  margin: 20px 0 8px 0;
 }
 
 .restaurant-info {
@@ -193,30 +234,103 @@
   border-radius: 8px;
 }
 
+.order-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1002;
+  animation: slideIn 0.3s ease-out;
+  display: none;
+}
+
+.cart-item,
+.cart-summary p {
+  padding-left: 10px;
+  margin-left: 8px;
+}
+
+.shopping-card {
+  overflow-x: hidden;
+}
+
+.dish-card {
+  box-sizing: border-box;
+}
+
+.dish-slider {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px 0;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+
+.dish-slider a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #f5a124;
+  transition: background-color 0.3s ease;
+}
+
+.dish-slider a:hover {
+  background-color: #bbb;
+}
+
+.dish-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.add-button-cart:hover,
+.remove-button-cart:hover {
+  background-color: #cf711f; /* dunkleres Orange */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
 @media (max-width: 900px) {
   .shopping-card {
-  transform: translateX(100%);
-  transition: transform 0.3s ease; 
-  position: fixed;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
-    height: 100%;
+    height: 90%;
     margin: 0;
     z-index: 1000;
     background: white;
   }
 
   .shopping-card.active {
-  transform: translateX(0);
+    transform: translateX(0);
   }
-
-
-
-
-
 
   .cart-toggle-button {
     display: block;
@@ -232,7 +346,7 @@
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-    transition: all 0.3s ease-in-out; /* Erweitert die Transition auf alle Eigenschaften */
+    transition: all 0.3s ease-in-out;
     width: 95%;
   }
 
@@ -244,7 +358,7 @@
 
   .shopping-card-content {
     max-height: calc(100vh - 80px);
-    padding-bottom: 80px;
+    padding-bottom: 100px;
   }
 
   .left-side {
@@ -268,20 +382,30 @@
   }
 
   .pizza-logo {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
     width: 35vh;
-    z-index: 10;
   }
 
-.item2 {
-  color: black;
-  width: 100%;
-  padding-left: 40px;
-}
+  .item2 {
+    color: black;
+    width: 100%;
+    padding-left: 40px;
+  }
 
+  .order-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1002;
+    animation: slideIn 0.3s ease-out;
+    display: none;
+    width: 300px;
+  }
 }
 
 @media (min-width: 901px) {
@@ -313,12 +437,7 @@
   }
 
   .pizza-logo {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
     width: 30vh;
-    z-index: 10;
   }
 }
 
@@ -346,11 +465,6 @@
   }
 
   .pizza-logo {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
     width: 30vh;
-    z-index: 10;
   }
 }
